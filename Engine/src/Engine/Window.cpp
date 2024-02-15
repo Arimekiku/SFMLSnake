@@ -1,20 +1,20 @@
-#include "Engine.h"
+#include "Window.h"
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
 namespace engine {
-    Engine::Engine() {
+    Window::Window() {
 
     }
 
-    Engine::~Engine() {
+    Window::~Window() {
 
     }
 
-    void Engine::Run() {
-        sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-        sf::CircleShape shape(100.f);
+    void Window::Run() {
+        auto window = sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
+        auto shape = sf::CircleShape(100.f);
         shape.setFillColor(sf::Color::Green);
 
         while (window.isOpen())
@@ -27,7 +27,9 @@ namespace engine {
             }
 
             window.clear();
+
             window.draw(shape);
+
             window.display();
         }
     }
