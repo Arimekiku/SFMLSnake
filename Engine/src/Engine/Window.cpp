@@ -13,24 +13,20 @@ namespace engine {
     }
 
     void Window::Run() {
-        auto window = sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
-        auto shape = sf::CircleShape(100.f);
-        shape.setFillColor(sf::Color::Green);
+        auto window = new sf::RenderWindow(sf::VideoMode(200, 200), "SFML works!");
 
-        while (window.isOpen())
+        while (window->isOpen())
         {
             sf::Event event;
-            while (window.pollEvent(event))
+            while (window->pollEvent(event))
             {
                 if (event.type == sf::Event::Closed)
-                    window.close();
+                    window->close();
             }
 
-            window.clear();
+            window->clear();
 
-            window.draw(shape);
-
-            window.display();
+            window->display();
         }
     }
 }
