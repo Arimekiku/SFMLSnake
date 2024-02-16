@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-class Application : public engine::Window {
+class Application : public engine::Engine {
 public:
 	Application() { }
 	~Application() { }

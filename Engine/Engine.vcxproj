@@ -185,17 +185,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\Engine\GameObject.h" />
-    <ClInclude Include="src\Engine\GameObject\Wall.h" />
+    <ClInclude Include="src\Engine\Entities\GameObject.h" />
+    <ClInclude Include="src\Engine\Entities\Wall.h" />
     <ClInclude Include="src\Engine\Services\TextureAtlas.h" />
     <ClInclude Include="src\Engine\Services\Timer.h" />
-    <ClInclude Include="src\Engine\Window.h" />
+    <ClInclude Include="src\Engine\WindowHandler.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Engine\GameObject\Wall.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Engine\Entities\Wall.cpp" />
     <ClCompile Include="src\Engine\Services\TextureAtlas.cpp" />
     <ClCompile Include="src\Engine\Services\Timer.cpp" />
-    <ClCompile Include="src\Engine\Window.cpp" />
+    <ClCompile Include="src\Engine\WindowHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

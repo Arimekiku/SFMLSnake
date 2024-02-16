@@ -1,16 +1,18 @@
 #pragma once
 
-class Timer {
-public:
-	Timer(float timeout);
+namespace engine {
+	class Timer {
+	public:
+		Timer(float timeout);
 
-	void tick(float deltaTime);
-	void reset();
-	void bind(void (*func)());
+		void tick(float deltaTime);
+		void reset();
+		void bind(void (*func)());
 
-private:
-	void (*func)();
+	private:
+		void (*func)();
 
-	float target;
-	float secondsElapsed;
-};
+		float target;
+		float secondsElapsed;
+	};
+}

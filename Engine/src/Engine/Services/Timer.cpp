@@ -1,22 +1,24 @@
 #include "Timer.h"
 
-Timer::Timer(float timeout) {
-	target = timeout;
-}
-
-void Timer::tick(float deltaTime) {
-	secondsElapsed += deltaTime;
-
-	if (secondsElapsed >= target) {
-		func();
-		reset();
+namespace engine {
+	Timer::Timer(float timeout) {
+		target = timeout;
 	}
-}
 
-void Timer::reset() {
-	secondsElapsed = 0;
-}
+	void Timer::tick(float deltaTime) {
+		secondsElapsed += deltaTime;
 
-void Timer::bind(void(*func)()){
-	this->func = func;
+		if (secondsElapsed >= target) {
+			func();
+			reset();
+		}
+	}
+
+	void Timer::reset() {
+		secondsElapsed = 0;
+	}
+
+	void Timer::bind(void(*func)()) {
+		this->func = func;
+	}
 }
