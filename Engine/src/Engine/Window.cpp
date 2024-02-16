@@ -3,6 +3,10 @@
 #include <iostream>
 #include "GameObject/Wall.h"
 
+void Test() {
+    std::cout<<"aaa";
+}
+
 namespace engine {
     Window::Window() {
         textureAtlas = new TextureAtlas();
@@ -12,6 +16,8 @@ namespace engine {
             auto newObject = new Wall({ i * 32, 0 }, textureAtlas->getTexture("WALL"));
             addGameObject(newObject);
         }
+
+        testTimer.bind(Test);
     }
 
     Window::~Window() {
@@ -19,6 +25,8 @@ namespace engine {
     }
 
     void Window::run() {
+        sf::Clock cl;
+
         auto window = new sf::RenderWindow(sf::VideoMode(640, 480), "SFML works!");
         if (window == NULL) {
             std::cout << "Can't create the window!" << std::endl;
@@ -41,6 +49,8 @@ namespace engine {
             }
 
             window->display();
+
+            testTimer.tick(cl.restart().asSeconds());
         }
 
         delete window;

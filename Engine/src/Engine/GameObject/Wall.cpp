@@ -17,4 +17,4 @@ Wall::~Wall() {
 
 void Wall::update() {
 
-};
+}

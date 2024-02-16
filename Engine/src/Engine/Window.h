@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Services/TextureAtlas.h"
+#include "Services/Timer.h"
 #include "GameObject.h"
 
 namespace engine {
@@ -11,6 +12,8 @@ namespace engine {
 
 		void run();
 		void addGameObject(GameObject* newObject);
+
+		Timer testTimer { 2 };
 
 	private:
 		TextureAtlas* textureAtlas;
