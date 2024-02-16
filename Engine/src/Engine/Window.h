@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Services/TextureAtlas.h"
+#include "GameObject.h"
 
 namespace engine {
 	class Window {
@@ -8,9 +9,12 @@ namespace engine {
 		Window();
 		virtual ~Window();
 
-		void Run();
+		void run();
+		void addGameObject(GameObject* newObject);
 
 	private:
 		TextureAtlas* textureAtlas;
+
+		std::vector<GameObject*> objects;
 	};
 }

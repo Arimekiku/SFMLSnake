@@ -8,7 +8,7 @@ public:
 
 int main() {
 	Application* app = new Application(); 
-	app->Run();
+	app->run();
 
 	return 0;
 }

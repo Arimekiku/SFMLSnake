@@ -1,25 +1,29 @@
 #include "Window.h"
 
 #include <iostream>
+#include "GameObject/Wall.h"
 
 namespace engine {
     Window::Window() {
         textureAtlas = new TextureAtlas();
-        textureAtlas->addTexture("APPLE", R"(D:\Dev\C++\SFMLSnake\resources\apple.png)");
+        textureAtlas->addTexture("WALL", R"(D:\Dev\C++\SFMLSnake\resources\sprites\brick.png)");
+
+        for (int i = 0; i < 10; i++) {
+            auto newObject = new Wall({ i * 32, 0 }, textureAtlas->getTexture("WALL"));
+            addGameObject(newObject);
+        }
     }
 
     Window::~Window() {
         delete textureAtlas;
     }
 
-    void Window::Run() {
+    void Window::run() {
         auto window = new sf::RenderWindow(sf::VideoMode(640, 480), "SFML works!");
         if (window == NULL) {
             std::cout << "Can't create the window!" << std::endl;
             throw std::exception();
         }
-
-        sf::Sprite* testSprite = new sf::Sprite(*textureAtlas->getTexture("APPLE"));
 
         while (window->isOpen())
         {
@@ -32,11 +36,17 @@ namespace engine {
 
             window->clear();
 
-            window->draw(*testSprite);
+            for (auto obj : objects) {
+                window->draw(obj->sprite);
+            }
 
             window->display();
         }
 
         delete window;
+    }
+
+    void Window::addGameObject(GameObject* newObject) {
+        objects.push_back(newObject);
     }
 }
