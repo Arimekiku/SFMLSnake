@@ -46,7 +46,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -182,18 +182,26 @@
     <Lib>
       <AdditionalLibraryDirectories>$(ProjectDir)vendor\SFML-2.6.1\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Engine\Entities\GameObject.h" />
+    <ClInclude Include="src\Engine\Entities\Player.h" />
     <ClInclude Include="src\Engine\Entities\Wall.h" />
+    <ClInclude Include="src\Engine\EventHandler.h" />
     <ClInclude Include="src\Engine\Services\TextureAtlas.h" />
     <ClInclude Include="src\Engine\Services\Timer.h" />
     <ClInclude Include="src\Engine\WindowHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp" />
+    <ClCompile Include="src\Engine\Entities\GameObject.cpp" />
+    <ClCompile Include="src\Engine\Entities\Player.cpp" />
     <ClCompile Include="src\Engine\Entities\Wall.cpp" />
+    <ClCompile Include="src\Engine\EventHandler.cpp" />
     <ClCompile Include="src\Engine\Services\TextureAtlas.cpp" />
     <ClCompile Include="src\Engine\Services\Timer.cpp" />
     <ClCompile Include="src\Engine\WindowHandler.cpp" />

@@ -1,12 +1,17 @@
 #include "Timer.h"
 
+#include <iostream>
+
 namespace engine {
 	Timer::Timer(float timeout) {
 		target = timeout;
+		secondsElapsed = 0;
 	}
 
 	void Timer::tick(float deltaTime) {
 		secondsElapsed += deltaTime;
+
+		std::cout << secondsElapsed << std::endl;
 
 		if (secondsElapsed >= target) {
 			func();
@@ -18,7 +23,7 @@ namespace engine {
 		secondsElapsed = 0;
 	}
 
-	void Timer::bind(void(*func)()) {
+	void Timer::bind(std::function<void()> func) {
 		this->func = func;
 	}
 }

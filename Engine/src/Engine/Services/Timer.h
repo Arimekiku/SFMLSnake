@@ -1,5 +1,7 @@
 #pragma once
 
+#include<functional>
+
 namespace engine {
 	class Timer {
 	public:
@@ -7,10 +9,10 @@ namespace engine {
 
 		void tick(float deltaTime);
 		void reset();
-		void bind(void (*func)());
+		void bind(std::function<void()> func);
 
 	private:
-		void (*func)();
+		std::function<void()> func;
 
 		float target;
 		float secondsElapsed;

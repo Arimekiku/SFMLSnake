@@ -1,19 +1,16 @@
 #include "WindowHandler.h"
 
 #include <iostream>
-#include "Entities/Wall.h"
 
 namespace engine {
-    WindowHandler::WindowHandler() {
-        window = new sf::RenderWindow(sf::VideoMode(640, 480), "SFML works!");
-        if (window == NULL) {
-            std::cout << "Can't create the window!" << std::endl;
-            throw std::exception();
-        }
+    WindowHandler::WindowHandler(sf::RenderWindow* newWindow) {
+        window = newWindow;
     }
 
     WindowHandler::~WindowHandler() {
-        delete window;
+        for (auto obj : renderObjects) {
+            delete obj;
+        }
     }
 
     void WindowHandler::render()
@@ -29,5 +26,13 @@ namespace engine {
 
     void WindowHandler::addRenderable(sf::Sprite* newObject) {
         renderObjects.push_back(newObject);
+    }
+
+    void WindowHandler::removeRenderable(sf::Sprite* objectToRemove) {
+        auto e = std::find(renderObjects.begin(), renderObjects.end(), objectToRemove);
+
+        if (e != renderObjects.end()) {
+            renderObjects.erase(e);
+        }
     }
 }

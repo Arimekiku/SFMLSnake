@@ -5,14 +5,14 @@
 namespace engine {
 	class GameObject {
 	public:
+		GameObject(const sf::Vector2i initPos, const sf::Texture* texture);
 		virtual ~GameObject() = default;
 
 		virtual void update() = 0;
 
-		sf::Vector2i worldPos;
-		sf::Sprite sprite;
+		sf::Sprite* sprite;
 
 	protected:
-		GameObject() = default;
+		sf::Vector2i worldPos;
 	};
 }
