@@ -5,14 +5,16 @@
 namespace engine {
 	class GameObject {
 	public:
-		GameObject(const sf::Vector2i initPos, const sf::Texture* texture);
+		GameObject(const sf::Texture* texture);
 		virtual ~GameObject() = default;
 
-		virtual void update() = 0;
+		sf::Vector2i getPosition() const;
+		void setPosition(const sf::Vector2i& newPosition);
 
 		sf::Sprite* sprite;
 
-	protected:
+	private:
 		sf::Vector2i worldPos;
+		sf::Vector2u textureSize;
 	};
 }

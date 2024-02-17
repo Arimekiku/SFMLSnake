@@ -3,17 +3,19 @@
 #include "GameObject.h"
 
 namespace engine {
-	class Player : public GameObject {
+	class Player {
 	public:
-		Player(const sf::Vector2i initPos, const sf::Texture* texture);
+		Player(GameObject* head);
 		~Player() = default;
 
-		void update() override;
-
 		void setMovementVector(sf::Vector2i newMovementVector);
+		void addSegment(GameObject* newSegment);
 		void move();
 
 	private:
+		GameObject* head;
+		std::vector<GameObject*> tail;
+
 		sf::Vector2i movementVector;
 	};
 }

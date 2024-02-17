@@ -4,6 +4,7 @@
 #include "Engine/EventHandler.h"
 #include "Engine/Entities/Player.h"
 #include "Engine/Services/TextureAtlas.h"
+#include "Engine/Services/GameObjectFactory.h"
 
 namespace engine {
 	class Engine {
@@ -17,10 +18,10 @@ namespace engine {
 		void close();
 		bool isOpen();
 
+		GameObjectFactory* objFactory;
 		WindowHandler* windowHandler;
 		EventHandler* eventHandler;
 
-		TextureAtlas* textureAtlas;
 		Player* player;
 
 		sf::RenderWindow* window;

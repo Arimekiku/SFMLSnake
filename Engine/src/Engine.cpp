@@ -16,11 +16,23 @@ namespace engine {
         windowHandler = new WindowHandler(window);
         eventHandler = new EventHandler(window);
 
-        textureAtlas = new TextureAtlas();
-        textureAtlas->addTexture("BRICK", R"(D:\Dev\C++\SFMLSnake\resources\sprites\brick.png)");
+        objFactory = new GameObjectFactory();
 
-        player = new Player({ 320, 240 }, textureAtlas->getTexture("BRICK"));
-        windowHandler->addRenderable(player->sprite);
+        GameObject* testObj1 = objFactory->spawnObject(GameObjectType::SNAKE_SEGMENT);
+        testObj1->setPosition(sf::Vector2i(10, 8));
+
+        GameObject* testObj2 = objFactory->spawnObject(GameObjectType::SNAKE_SEGMENT);
+        testObj2->setPosition(sf::Vector2i(10, 7));
+
+        GameObject* testObj3 = objFactory->spawnObject(GameObjectType::SNAKE_SEGMENT);
+        testObj3->setPosition(sf::Vector2i(10, 6));
+
+        player = new Player(testObj1);
+        windowHandler->addRenderable(testObj1->sprite);
+        player->addSegment(testObj2);
+        windowHandler->addRenderable(testObj2->sprite);
+        player->addSegment(testObj3);
+        windowHandler->addRenderable(testObj3->sprite);
 	}
 
     Engine::~Engine() {
@@ -37,6 +49,8 @@ namespace engine {
         t->bind(std::bind(&Player::move, player));
 
         while (isOpen()) {
+            float deltaTime = cl.restart().asSeconds();
+
             std::vector<sf::Event> events = eventHandler->pollEvents();
 
             for (const auto& e : events) {
@@ -62,7 +76,7 @@ namespace engine {
                 }
             }
 
-            t->tick(cl.restart().asSeconds());
+            t->tick(deltaTime);
 
             windowHandler->render();
         }

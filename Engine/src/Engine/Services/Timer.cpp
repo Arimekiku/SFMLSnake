@@ -11,8 +11,6 @@ namespace engine {
 	void Timer::tick(float deltaTime) {
 		secondsElapsed += deltaTime;
 
-		std::cout << secondsElapsed << std::endl;
-
 		if (secondsElapsed >= target) {
 			func();
 			reset();
