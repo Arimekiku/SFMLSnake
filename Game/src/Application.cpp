@@ -8,6 +8,8 @@ public:
 };
 
 int main() {
+	srand(static_cast<unsigned int>(time(0)));
+
 	Application* app = new Application(); 
 	app->update();
 

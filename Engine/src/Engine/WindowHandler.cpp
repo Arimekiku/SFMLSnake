@@ -8,13 +8,17 @@ namespace engine {
     }
 
     void WindowHandler::render() {
-        window->clear(sf::Color(233, 234, 236));
+        window->clear();
 
         for (auto obj : renderObjects) {
             window->draw(*obj);
         }
 
         window->display();
+    }
+
+    void WindowHandler::close() {
+        window->close();
     }
 
     void WindowHandler::addRenderable(sf::Sprite* newObject) {

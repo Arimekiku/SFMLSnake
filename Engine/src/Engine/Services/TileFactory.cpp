@@ -3,10 +3,10 @@
 namespace engine {
 	TileFactory::TileFactory() {
 		textureAtlas = new TextureAtlas();
-		textureAtlas->addTexture("BRICK", R"(D:\Dev\C++\SFMLSnake\resources\sprites\brick.png)");
-		textureAtlas->addTexture("APPLE", R"(D:\Dev\C++\SFMLSnake\resources\sprites\apple.png)");
-		textureAtlas->addTexture("SNAKE_HEAD", R"(D:\Dev\C++\SFMLSnake\resources\sprites\snake_head.png)");
-		textureAtlas->addTexture("SNAKE_BODY", R"(D:\Dev\C++\SFMLSnake\resources\sprites\snake_body.png)");
+		textureAtlas->addTexture("BRICK", R"(resources\sprites\brick.png)");
+		textureAtlas->addTexture("APPLE", R"(resources\sprites\apple.png)");
+		textureAtlas->addTexture("SNAKE_HEAD", R"(resources\sprites\snake_head.png)");
+		textureAtlas->addTexture("SNAKE_BODY", R"(resources\sprites\snake_body.png)");
 	}
 
 	TileFactory::~TileFactory() {

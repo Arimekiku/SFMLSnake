@@ -68,7 +68,7 @@ namespace engine {
 				break;
 			case SNAKE_BODY:
 			case WALL:
-				std::cout << "You lose";
+				isDead = true;
 				break;
 		}
 	}

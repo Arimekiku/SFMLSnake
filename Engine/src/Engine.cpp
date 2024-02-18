@@ -15,7 +15,7 @@ namespace engine {
 
         windowHandler = new WindowHandler(window);
 
-        field = new Field(20, 15, windowHandler);
+        field = new Field(windowHandler);
         std::vector<Tile*> tiles = field->generateField();
 
         for (const auto& tile : tiles) {
@@ -41,12 +41,16 @@ namespace engine {
     void Engine::update() {
         sf::Clock cl;
 
-        Timer t = Timer(0.5);
+        Timer t = Timer(0.3f);
         t.bind(std::bind(&PlayerHandler::movePlayer, playerHandler));
 
         while (window->isOpen()) {
             float deltaTime = cl.restart().asSeconds();
             t.tick(deltaTime);
+
+            if (playerHandler->isDead) {
+                windowHandler->close();
+            }
 
             field->update();
             eventHandler->pollEvents();

@@ -9,6 +9,7 @@ namespace engine {
 		~WindowHandler() = default;
 
 		void render();
+		void close();
 		void addRenderable(sf::Sprite* newObject);
 		void removeRenderable(sf::Sprite* objectToRemove);
 

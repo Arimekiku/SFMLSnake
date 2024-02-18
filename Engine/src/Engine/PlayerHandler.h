@@ -12,6 +12,8 @@ namespace engine {
 		void setMovementVector(sf::Vector2i newMovementVector);
 		void addSegment();
 
+		bool isDead;
+
 	private:
 		void checkCollision(Tile* collisionTile);
 

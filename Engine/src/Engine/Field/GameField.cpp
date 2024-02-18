@@ -2,37 +2,59 @@
 
 #include <iostream>
 #include <algorithm>
+#include <fstream>
 
 namespace engine {
-	Field::Field(int rows, int cols, WindowHandler* newWindowHandler) {
+	Field::Field(WindowHandler* newWindowHandler) {
+		rowSize = 0;
+		colSize = 0;
+
 		tileFactory = new TileFactory();
 		windowHandler = newWindowHandler;
 
-		rowSize = rows;
-		colSize = cols;
+		std::fstream fInput;
+		fInput.open(R"(resources\map\map.json)");
+		fInput >> currentMap;
+		fInput.close();
 	}
 
 	std::vector<Tile*> Field::generateField() {
-		int totalTiles = rowSize * colSize;
-		printf("Generating field with %d tiles\n", totalTiles);
+		nlohmann::json mapJSON = currentMap["map"];
 
-		while (totalTiles != 0) {
-			if (totalTiles == 150) {
-				Tile* tile = tileFactory->spawnTile(SNAKE);
+		int currentW = 0, currentH = 0;
+		for (const auto& obj : mapJSON) {
+			std::vector<int> row = obj;
+			for (const int value : row) {
+				Tile* tile;
+				switch (value) {
+					case NOTHING:
+						tile = tileFactory->spawnTile(NOTHING);
+						break;
+					case WALL:
+						tile = tileFactory->spawnTile(WALL);
+						break;
+					case SNAKE:
+						tile = tileFactory->spawnTile(SNAKE);
+						break;
+					default:
+						std::cout << "Map conversion fail" << std::endl;
+						throw std::exception();
+				}
+
 				tiles.push_back(tile);
+				if (tile->getType() != NOTHING) {
+					windowHandler->addRenderable(tile->getObject()->sprite);
+				}
 
-				windowHandler->addRenderable(tile->getObject()->sprite);
-
-				totalTiles--;
-				continue;
+				currentW++;
 			}
 
-			Tile* tile = tileFactory->spawnTile(NOTHING);
-			tiles.push_back(tile);
-
-			totalTiles--;
+			rowSize = currentW;
+			currentW = 0;
+			currentH++;
 		}
 
+		colSize = currentH;
 		update();
 
 		return tiles;

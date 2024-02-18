@@ -1,12 +1,14 @@
 #pragma once
 
+#include <nlohmann/json.hpp>
+
 #include "../Services/TileFactory.h"
 #include "../WindowHandler.h"
 
 namespace engine {
 	class Field {
 	public:
-		Field(int rows, int cols, WindowHandler* newWindowHandler);
+		Field(WindowHandler* newWindowHandler);
 		~Field() = default;
 
 		void update();
@@ -27,5 +29,6 @@ namespace engine {
 		WindowHandler* windowHandler;
 
 		std::vector<Tile*> tiles;
+		nlohmann::json currentMap;
 	};
 }
