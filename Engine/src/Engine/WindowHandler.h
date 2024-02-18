@@ -6,7 +6,7 @@ namespace engine {
 	class WindowHandler {
 	public:
 		WindowHandler(sf::RenderWindow* newWindow);
-		~WindowHandler();
+		~WindowHandler() = default;
 
 		void render();
 		void addRenderable(sf::Sprite* newObject);

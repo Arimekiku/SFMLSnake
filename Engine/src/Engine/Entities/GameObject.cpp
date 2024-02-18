@@ -10,11 +10,15 @@ namespace engine {
 		sprite->setOrigin(newOrigin);
 	}
 
+	GameObject::~GameObject() {
+		delete sprite;
+	}
+
 	sf::Vector2i GameObject::getPosition() const {
 		return worldPos;
 	}
 
-	void GameObject::setPosition(const sf::Vector2i& newPosition) {
+	void GameObject::setPosition(sf::Vector2i newPosition) {
 		worldPos = newPosition;
 		sprite->setPosition(sf::Vector2f(worldPos.x * textureSize.x, worldPos.y * textureSize.y));
 	}

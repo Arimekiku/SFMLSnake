@@ -13,14 +13,11 @@ namespace engine {
 		void update();
 
 	private:
-		void close();
-		bool isOpen();
-
 		Field* field;
 
 		WindowHandler* windowHandler;
 		EventHandler* eventHandler;
-		PlayerHandler* player;
+		PlayerHandler* playerHandler;
 
 		sf::RenderWindow* window;
 	};

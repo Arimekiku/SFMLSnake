@@ -7,6 +7,7 @@ namespace engine {
 		NOTHING,
 		WALL,
 		SNAKE,
+		SNAKE_BODY,
 		APPLE
 	};
 

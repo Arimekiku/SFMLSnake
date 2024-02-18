@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Services/TileFactory.h"
+#include "../WindowHandler.h"
 
 namespace engine {
 	class Field {

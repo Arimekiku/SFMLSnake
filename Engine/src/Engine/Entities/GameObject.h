@@ -6,10 +6,10 @@ namespace engine {
 	class GameObject {
 	public:
 		GameObject(const sf::Texture* texture);
-		virtual ~GameObject() = default;
+		~GameObject();
 
 		sf::Vector2i getPosition() const;
-		void setPosition(const sf::Vector2i& newPosition);
+		void setPosition(sf::Vector2i newPosition);
 
 		sf::Sprite* sprite;
 

@@ -18,21 +18,22 @@ namespace engine {
         field = new Field(20, 15, windowHandler);
         std::vector<Tile*> tiles = field->generateField();
 
-        eventHandler = new EventHandler(window);
-
-        for (auto tile : tiles) {
-            if (tile->getType() == TileType::SNAKE) {
-                player = new PlayerHandler(field, tile);
-                player->addSegment();
-                player->addSegment();
+        for (const auto& tile : tiles) {
+            if (tile->getType() == SNAKE) {
+                playerHandler = new PlayerHandler(field, tile);
+                playerHandler->addSegment();
+                playerHandler->addSegment();
             }
         }
         field->spawnNextAppleTile();
+
+        eventHandler = new EventHandler(window, playerHandler);
 	}
 
     Engine::~Engine() {
         delete windowHandler;
         delete eventHandler;
+        delete playerHandler;
 
         delete window;
     }
@@ -40,55 +41,16 @@ namespace engine {
     void Engine::update() {
         sf::Clock cl;
 
-        Timer* t = new Timer(0.5);
-        t->bind(std::bind(&PlayerHandler::movePlayer, player));
+        Timer t = Timer(0.5);
+        t.bind(std::bind(&PlayerHandler::movePlayer, playerHandler));
 
-        while (isOpen()) {
+        while (window->isOpen()) {
             float deltaTime = cl.restart().asSeconds();
-
-            std::vector<sf::Event> events = eventHandler->pollEvents();
-
-            for (const auto& e : events) {
-                if (e.type == sf::Event::Closed) {
-                    close();
-                }
-
-                if (e.type == sf::Event::KeyPressed) {
-                    switch (e.key.scancode) {
-                        case sf::Keyboard::Key::W:
-                            player->setMovementVector({ 0, -1 });
-                            break;
-                        case sf::Keyboard::Key::S: 
-                            player->setMovementVector({ 0, 1 });
-                            break;
-                        case sf::Keyboard::Key::A:
-                            player->setMovementVector({ -1, 0 });
-                            break;
-                        case sf::Keyboard::Key::D:
-                            player->setMovementVector({ 1, 0 });
-                            break;
-                    }
-                }
-            }
-
-            t->tick(deltaTime);
+            t.tick(deltaTime);
 
             field->update();
+            eventHandler->pollEvents();
             windowHandler->render();
         }
-    }
-
-    void Engine::close() {
-        window->close();
-
-        delete this;
-    }
-
-    bool Engine::isOpen() {
-        if (window->isOpen()) {
-            return true;
-        }
-
-        return false;
     }
 }

@@ -7,15 +7,8 @@ namespace engine {
         window = newWindow;
     }
 
-    WindowHandler::~WindowHandler() {
-        for (auto obj : renderObjects) {
-            delete obj;
-        }
-    }
-
-    void WindowHandler::render()
-    {
-        window->clear();
+    void WindowHandler::render() {
+        window->clear(sf::Color(233, 234, 236));
 
         for (auto obj : renderObjects) {
             window->draw(*obj);

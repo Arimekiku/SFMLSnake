@@ -9,7 +9,6 @@ public:
 
 int main() {
 	Application* app = new Application(); 
-
 	app->update();
 
 	return 0;

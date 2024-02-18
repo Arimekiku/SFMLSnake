@@ -3,16 +3,14 @@
 #include <iostream>
 
 namespace engine {
-	PlayerHandler::PlayerHandler(Field* newField, Tile* startTile)
-	{
+	PlayerHandler::PlayerHandler(Field* newField, Tile* startTile) {
 		gameField = newField;
 		head = startTile;
 
 		movementVector = sf::Vector2i(0, 1);
 	}
 
-	void PlayerHandler::movePlayer()
-	{
+	void PlayerHandler::movePlayer() {
 		sf::Vector2i headPosition = head->getObject()->getPosition();
 		Tile* nextTile = gameField->getTile(headPosition.x + movementVector.x, headPosition.y + movementVector.y);
 
@@ -41,7 +39,7 @@ namespace engine {
 		if (tail.empty()) {
 			sf::Vector2i headPosition = head->getObject()->getPosition();
 			Tile* oldTile = gameField->getTile(headPosition.x + movementVector.x, headPosition.y - movementVector.y);
-			newSegment = gameField->changeTile(oldTile, TileType::SNAKE);
+			newSegment = gameField->changeTile(oldTile, SNAKE_BODY);
 		} else {
 			auto firstTailElemPosition = tail[tail.size() - 1]->getObject()->getPosition();
 			auto secondTailElemPosition = sf::Vector2i();
@@ -54,23 +52,22 @@ namespace engine {
 			sf::Vector2i spawnPosition = 2 * firstTailElemPosition - secondTailElemPosition;
 
 			Tile* oldTile = gameField->getTile(spawnPosition.x, spawnPosition.y);
-			newSegment = gameField->changeTile(oldTile, TileType::SNAKE);
+			newSegment = gameField->changeTile(oldTile, SNAKE_BODY);
 		}
 
 		tail.push_back(newSegment);
 	}
 
-	void PlayerHandler::checkCollision(Tile* collisionTile)
-	{
+	void PlayerHandler::checkCollision(Tile* collisionTile) {
 		switch (collisionTile->getType()) {
-			case TileType::NOTHING: 
+			case NOTHING: 
 				break;
-			case TileType::APPLE:
+			case APPLE:
 				addSegment();
 				gameField->spawnNextAppleTile();
 				break;
-			case TileType::SNAKE:
-			case TileType::WALL:
+			case SNAKE_BODY:
+			case WALL:
 				std::cout << "You lose";
 				break;
 		}

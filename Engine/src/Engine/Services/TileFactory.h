@@ -2,7 +2,6 @@
 
 #include "TextureAtlas.h"
 #include "../Field/Tile.h"
-#include "../WindowHandler.h"
 
 namespace engine {
 	class TileFactory {

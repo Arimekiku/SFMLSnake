@@ -1,20 +1,37 @@
 #include "EventHandler.h"
 
 namespace engine {
-	EventHandler::EventHandler(sf::RenderWindow* newWindow) {
-		window = newWindow;
-	}
+    EventHandler::EventHandler(sf::RenderWindow* newWindow, PlayerHandler* newPlayer) {
+        window = newWindow;
+        player = newPlayer;
+    }
 
-	std::vector<sf::Event> EventHandler::pollEvents() {
-		std::vector<sf::Event> events;
+    void EventHandler::pollEvents() {
+        sf::Event e;
+        while (window->pollEvent(e)) {
+            if (e.type == sf::Event::Closed) {
+                window->close();
+            }
 
-		sf::Event e;
-		while (window->pollEvent(e)) {
-			sf::Event newEvent = sf::Event(e);
-
-			events.push_back(newEvent);
-		}
-
-		return events;
-	}
+            if (e.type == sf::Event::KeyPressed) {
+                switch (e.key.scancode) {
+                case sf::Keyboard::Key::W:
+                    player->setMovementVector(sf::Vector2i(0, -1));
+                    break;
+                case sf::Keyboard::Key::S:
+                    player->setMovementVector(sf::Vector2i(0, 1));
+                    break;
+                case sf::Keyboard::Key::A:
+                    player->setMovementVector(sf::Vector2i(-1, 0));
+                    break;
+                case sf::Keyboard::Key::D:
+                    player->setMovementVector(sf::Vector2i(1, 0));
+                    break;
+                case sf::Keyboard::Key::Escape:
+                    window->close();
+                    break;
+                }
+            }
+        }
+    }
 }
