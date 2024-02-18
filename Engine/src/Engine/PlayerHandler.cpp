@@ -43,8 +43,17 @@ namespace engine {
 			Tile* oldTile = gameField->getTile(headPosition.x + movementVector.x, headPosition.y - movementVector.y);
 			newSegment = gameField->changeTile(oldTile, TileType::SNAKE);
 		} else {
-			sf::Vector2i lastPosition = tail[tail.size() - 1]->getObject()->getPosition();
-			Tile* oldTile = gameField->getTile(lastPosition.x + movementVector.x, lastPosition.y - movementVector.y);
+			auto firstTailElemPosition = tail[tail.size() - 1]->getObject()->getPosition();
+			auto secondTailElemPosition = sf::Vector2i();
+
+			if (tail.size() == 1) {
+				secondTailElemPosition = head->getObject()->getPosition();
+			} else {
+				secondTailElemPosition = tail[tail.size() - 2]->getObject()->getPosition();
+			}
+			sf::Vector2i spawnPosition = 2 * firstTailElemPosition - secondTailElemPosition;
+
+			Tile* oldTile = gameField->getTile(spawnPosition.x, spawnPosition.y);
 			newSegment = gameField->changeTile(oldTile, TileType::SNAKE);
 		}
 
