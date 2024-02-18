@@ -63,6 +63,7 @@ namespace engine {
 			case NOTHING: 
 				break;
 			case APPLE:
+				gameField->changeTile(collisionTile, NOTHING);
 				addSegment();
 				gameField->spawnNextAppleTile();
 				break;
