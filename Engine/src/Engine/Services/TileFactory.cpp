@@ -6,6 +6,7 @@ namespace engine {
 
 		textureAtlas = new TextureAtlas();
 		textureAtlas->addTexture("BRICK", R"(D:\Dev\C++\SFMLSnake\resources\sprites\brick.png)");
+		textureAtlas->addTexture("APPLE", R"(D:\Dev\C++\SFMLSnake\resources\sprites\apple.png)");
 	}
 
 	TileFactory::~TileFactory() {
@@ -16,21 +17,18 @@ namespace engine {
 	Tile* TileFactory::spawnTile(TileType objType) {
 		Tile* tileToSpawn = nullptr;
 
-		switch (objType) {
-			case NOTHING:
-				tileToSpawn = new Tile(TileType::NOTHING, nullptr);
-				break;
-			case SNAKE:
-				auto obj = new GameObject(textureAtlas->getTexture("BRICK"));
-				windowHandler->addRenderable(obj->sprite);
-				tileToSpawn = new Tile(TileType::SNAKE, obj);
-				break;
-			//case WALL:
-			//	//objToSpawn = new Wall(textureAtlas->getTexture("WALL"));
-			//	break;
-			//case APPLE:
-			//	//objToSpawn = new Apple(textureAtlas->getTexture("APPLE"));
-			//	break;
+		if (objType == WALL) {
+
+		} else if (objType == SNAKE) {
+			auto snake = new GameObject(textureAtlas->getTexture("BRICK"));
+			windowHandler->addRenderable(snake->sprite);
+			tileToSpawn = new Tile(TileType::SNAKE, snake);
+		} else if (objType == APPLE) {
+			auto apple = new GameObject(textureAtlas->getTexture("APPLE"));
+			windowHandler->addRenderable(apple->sprite);
+			tileToSpawn = new Tile(TileType::APPLE, apple);
+		} else {
+			tileToSpawn = new Tile(TileType::NOTHING, nullptr);
 		}
 
 		return tileToSpawn;

@@ -190,7 +190,6 @@
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Engine\Entities\GameObject.h" />
-    <ClInclude Include="src\Engine\Entities\Wall.h" />
     <ClInclude Include="src\Engine\EventHandler.h" />
     <ClInclude Include="src\Engine\Field\GameField.h" />
     <ClInclude Include="src\Engine\Field\Tile.h" />
@@ -203,7 +202,6 @@
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Engine\Entities\GameObject.cpp" />
-    <ClCompile Include="src\Engine\Entities\Wall.cpp" />
     <ClCompile Include="src\Engine\EventHandler.cpp" />
     <ClCompile Include="src\Engine\Field\GameField.cpp" />
     <ClCompile Include="src\Engine\Field\Tile.cpp" />

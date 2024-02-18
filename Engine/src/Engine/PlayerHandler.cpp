@@ -1,5 +1,7 @@
 #include "PlayerHandler.h"
 
+#include <iostream>
+
 namespace engine {
 	PlayerHandler::PlayerHandler(Field* newField, Tile* startTile)
 	{
@@ -11,7 +13,10 @@ namespace engine {
 
 	void PlayerHandler::movePlayer()
 	{
-		auto lastStoredPosition = head->getObject()->getPosition();
+		sf::Vector2i headPosition = head->getObject()->getPosition();
+		Tile* nextTile = gameField->getTile(headPosition.x + movementVector.x, headPosition.y + movementVector.y);
+
+		auto lastStoredPosition = headPosition;
 		auto nextPosition = lastStoredPosition + movementVector;
 
 		auto nextTileToSwap = gameField->getTile(nextPosition.x, nextPosition.y);
@@ -22,6 +27,8 @@ namespace engine {
 			lastStoredPosition = segment->getObject()->getPosition();
 			gameField->swapTiles(segment, nextTileToSwap);
 		}
+
+		checkCollision(nextTile);
 	}
 
 	void PlayerHandler::setMovementVector(sf::Vector2i newMovementVector) {
@@ -42,5 +49,21 @@ namespace engine {
 		}
 
 		tail.push_back(newSegment);
+	}
+
+	void PlayerHandler::checkCollision(Tile* collisionTile)
+	{
+		switch (collisionTile->getType()) {
+			case TileType::NOTHING: 
+				break;
+			case TileType::APPLE:
+				addSegment();
+				gameField->spawnNextAppleTile();
+				break;
+			case TileType::SNAKE:
+			case TileType::WALL:
+				std::cout << "You lose";
+				break;
+		}
 	}
 }

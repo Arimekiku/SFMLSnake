@@ -13,6 +13,8 @@ namespace engine {
 		void addSegment();
 
 	private:
+		void checkCollision(Tile* collisionTile);
+
 		Field* gameField;
 
 		Tile* head;

@@ -17,14 +17,14 @@ namespace engine {
 
 		while (totalTiles != 0) {
 			if (totalTiles == 150) {
-				Tile* tile = tileFactory->spawnTile(TileType::SNAKE);
+				Tile* tile = tileFactory->spawnTile(SNAKE);
 				tiles.push_back(tile);
 
 				totalTiles--;
 				continue;
 			}
 
-			Tile* tile = tileFactory->spawnTile(TileType::NOTHING);
+			Tile* tile = tileFactory->spawnTile(NOTHING);
 			tiles.push_back(tile);
 
 			totalTiles--;
@@ -60,8 +60,20 @@ namespace engine {
 		updateTile(tiles[secondIndex]);
 	}
 
-	Tile* Field::changeTile(Tile* tile, TileType newType)
-	{
+	void Field::spawnNextAppleTile() {
+		Tile* targetTile = nullptr;
+
+		while (targetTile == nullptr || targetTile->getType() != NOTHING) {
+			int x = rand() % rowSize;
+			int y = rand() % colSize;
+
+			targetTile = getTile(x, y);
+		}
+		
+		changeTile(targetTile, APPLE);
+	}
+
+	Tile* Field::changeTile(Tile* tile, TileType newType) {
 		Tile* newTile = tileFactory->spawnTile(newType);
 
 		int index = getTileIndex(tile);

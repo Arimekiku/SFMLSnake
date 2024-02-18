@@ -28,6 +28,7 @@ namespace engine {
                 player->addSegment();
             }
         }
+        field->spawnNextAppleTile();
 	}
 
     Engine::~Engine() {
@@ -40,7 +41,7 @@ namespace engine {
     void Engine::update() {
         sf::Clock cl;
 
-        Timer* t = new Timer(2);
+        Timer* t = new Timer(0.5);
         t->bind(std::bind(&PlayerHandler::movePlayer, player));
 
         while (isOpen()) {

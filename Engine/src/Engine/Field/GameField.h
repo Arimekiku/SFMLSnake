@@ -13,6 +13,7 @@ namespace engine {
 		std::vector<Tile*> generateField();
 		Tile* getTile(int x, int y);
 		void swapTiles(Tile* first, Tile* second);
+		void spawnNextAppleTile();
 		Tile* changeTile(Tile* tile, TileType newType);
 
 	private:
