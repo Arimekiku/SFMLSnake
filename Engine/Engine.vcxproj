@@ -190,10 +190,12 @@
   <ItemGroup>
     <ClInclude Include="src\Engine.h" />
     <ClInclude Include="src\Engine\Entities\GameObject.h" />
-    <ClInclude Include="src\Engine\Entities\Player.h" />
     <ClInclude Include="src\Engine\Entities\Wall.h" />
     <ClInclude Include="src\Engine\EventHandler.h" />
-    <ClInclude Include="src\Engine\Services\GameObjectFactory.h" />
+    <ClInclude Include="src\Engine\Field\GameField.h" />
+    <ClInclude Include="src\Engine\Field\Tile.h" />
+    <ClInclude Include="src\Engine\PlayerHandler.h" />
+    <ClInclude Include="src\Engine\Services\TileFactory.h" />
     <ClInclude Include="src\Engine\Services\TextureAtlas.h" />
     <ClInclude Include="src\Engine\Services\Timer.h" />
     <ClInclude Include="src\Engine\WindowHandler.h" />
@@ -201,10 +203,12 @@
   <ItemGroup>
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\Engine\Entities\GameObject.cpp" />
-    <ClCompile Include="src\Engine\Entities\Player.cpp" />
     <ClCompile Include="src\Engine\Entities\Wall.cpp" />
     <ClCompile Include="src\Engine\EventHandler.cpp" />
-    <ClCompile Include="src\Engine\Services\GameObjectFactory.cpp" />
+    <ClCompile Include="src\Engine\Field\GameField.cpp" />
+    <ClCompile Include="src\Engine\Field\Tile.cpp" />
+    <ClCompile Include="src\Engine\PlayerHandler.cpp" />
+    <ClCompile Include="src\Engine\Services\TileFactory.cpp" />
     <ClCompile Include="src\Engine\Services\TextureAtlas.cpp" />
     <ClCompile Include="src\Engine\Services\Timer.cpp" />
     <ClCompile Include="src\Engine\WindowHandler.cpp" />

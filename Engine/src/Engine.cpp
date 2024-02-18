@@ -14,25 +14,20 @@ namespace engine {
         window->setFramerateLimit(60);
 
         windowHandler = new WindowHandler(window);
+
+        auto tileFactory = new TileFactory(windowHandler);
+        field = new Field(20, 15, tileFactory);
+        std::vector<Tile*> tiles = field->generateField();
+
         eventHandler = new EventHandler(window);
 
-        objFactory = new GameObjectFactory();
-
-        GameObject* testObj1 = objFactory->spawnObject(GameObjectType::SNAKE_SEGMENT);
-        testObj1->setPosition(sf::Vector2i(10, 8));
-
-        GameObject* testObj2 = objFactory->spawnObject(GameObjectType::SNAKE_SEGMENT);
-        testObj2->setPosition(sf::Vector2i(10, 7));
-
-        GameObject* testObj3 = objFactory->spawnObject(GameObjectType::SNAKE_SEGMENT);
-        testObj3->setPosition(sf::Vector2i(10, 6));
-
-        player = new Player(testObj1);
-        windowHandler->addRenderable(testObj1->sprite);
-        player->addSegment(testObj2);
-        windowHandler->addRenderable(testObj2->sprite);
-        player->addSegment(testObj3);
-        windowHandler->addRenderable(testObj3->sprite);
+        for (auto tile : tiles) {
+            if (tile->getType() == TileType::SNAKE) {
+                player = new PlayerHandler(field, tile);
+                player->addSegment();
+                player->addSegment();
+            }
+        }
 	}
 
     Engine::~Engine() {
@@ -46,7 +41,7 @@ namespace engine {
         sf::Clock cl;
 
         Timer* t = new Timer(2);
-        t->bind(std::bind(&Player::move, player));
+        t->bind(std::bind(&PlayerHandler::movePlayer, player));
 
         while (isOpen()) {
             float deltaTime = cl.restart().asSeconds();
@@ -78,6 +73,7 @@ namespace engine {
 
             t->tick(deltaTime);
 
+            field->update();
             windowHandler->render();
         }
     }
