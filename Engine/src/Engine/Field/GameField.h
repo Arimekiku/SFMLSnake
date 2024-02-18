@@ -5,7 +5,7 @@
 namespace engine {
 	class Field {
 	public:
-		Field(int rows, int cols, TileFactory* newFactory);
+		Field(int rows, int cols, WindowHandler* newWindowHandler);
 		~Field() = default;
 
 		void update();
@@ -23,6 +23,8 @@ namespace engine {
 		int rowSize, colSize;
 
 		TileFactory* tileFactory;
+		WindowHandler* windowHandler;
+
 		std::vector<Tile*> tiles;
 	};
 }

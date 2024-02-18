@@ -7,13 +7,12 @@
 namespace engine {
 	class TileFactory {
 	public:
-		TileFactory(WindowHandler* newRenderWindow);
+		TileFactory();
 		~TileFactory();
 
 		Tile* spawnTile(TileType objType);
 
 	private:
 		TextureAtlas* textureAtlas;
-		WindowHandler* windowHandler;
 	};
 }

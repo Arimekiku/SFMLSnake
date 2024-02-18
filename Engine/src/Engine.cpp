@@ -15,8 +15,7 @@ namespace engine {
 
         windowHandler = new WindowHandler(window);
 
-        auto tileFactory = new TileFactory(windowHandler);
-        field = new Field(20, 15, tileFactory);
+        field = new Field(20, 15, windowHandler);
         std::vector<Tile*> tiles = field->generateField();
 
         eventHandler = new EventHandler(window);

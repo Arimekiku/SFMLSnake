@@ -4,8 +4,9 @@
 #include <algorithm>
 
 namespace engine {
-	Field::Field(int rows, int cols, TileFactory* newFactory) {
-		tileFactory = newFactory;
+	Field::Field(int rows, int cols, WindowHandler* newWindowHandler) {
+		tileFactory = new TileFactory();
+		windowHandler = newWindowHandler;
 
 		rowSize = rows;
 		colSize = cols;
@@ -19,6 +20,8 @@ namespace engine {
 			if (totalTiles == 150) {
 				Tile* tile = tileFactory->spawnTile(SNAKE);
 				tiles.push_back(tile);
+
+				windowHandler->addRenderable(tile->getObject()->sprite);
 
 				totalTiles--;
 				continue;
@@ -74,9 +77,15 @@ namespace engine {
 	}
 
 	Tile* Field::changeTile(Tile* tile, TileType newType) {
-		Tile* newTile = tileFactory->spawnTile(newType);
-
 		int index = getTileIndex(tile);
+		if (tile->getType() != NOTHING) {
+			windowHandler->removeRenderable(tile->getObject()->sprite);
+		}
+
+		Tile* newTile = tileFactory->spawnTile(newType);
+		if (newTile->getType() != NOTHING) {
+			windowHandler->addRenderable(newTile->getObject()->sprite);
+		}
 		tiles[index] = newTile;
 		updateTile(tiles[index]);
 
